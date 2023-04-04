@@ -8,9 +8,9 @@ Scenario: Buying an event
 	When I press the button 'KÖP BILJETT'
 	And I select a ticket type by pressing the button '+' once for one ticket
 	And I press the button 'HITTA 1 BILJETT(ER)
-	And it choose a seat of chose it myself
 	And press the button 'GÅ VIDARE' to the cart
-	And write my e-mail and post
+	And write my e-mail
+	And write my post
 	And press the button 'FORTSÄTT' in Klarna checkout
 	And press the button 'BETALA KÖP' to continue Klarna checkout
 	And press the button 'BETALA {0} KR IDAG MED K.' to finish the purchase

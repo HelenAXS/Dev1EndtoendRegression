@@ -21,7 +21,7 @@ namespace Dev1EndtoendRegression.Objects
             Page = page;
         }
 
-        public async Task ClickMatcherMenuOptionAsync(string selector)
+        public async Task ClickButtonsAndMenuOptionsAsync(string selector)
         {
             var element = await Page.WaitForSelectorAsync(selector);
             await element.ClickAsync();

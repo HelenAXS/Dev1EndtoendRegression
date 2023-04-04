@@ -125,13 +125,13 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I press the button \'HITTA 1 BILJETT(ER)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 11
- testRunner.And("it choose a seat of chose it myself", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 12
  testRunner.And("press the button \'GÅ VIDARE\' to the cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 12
+ testRunner.And("write my e-mail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
 #line 13
- testRunner.And("write my e-mail and post", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("write my post", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
  testRunner.And("press the button \'FORTSÄTT\' in Klarna checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
