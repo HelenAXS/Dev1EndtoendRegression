@@ -134,15 +134,12 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("write my post", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.And("press the button \'FORTSÄTT\' in Klarna checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 15
  testRunner.And("press the button \'BETALA KÖP\' to continue Klarna checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 16
+#line 15
  testRunner.And("press the button \'BETALA {0} KR IDAG MED K.\' to finish the purchase", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 17
+#line 16
  testRunner.Then("I get to the success page \'https://web4.1.dev.tt.eu.axs.com/Checkout/KlarnaSucces" +
                         "s/ ...\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

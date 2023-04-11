@@ -59,37 +59,45 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [When(@"write my e-mail")]
         public async Task WhenWriteMyE_MailAsync()
         {
-            //string selector = "input#billing-email";
-            //await _pageObject.Page.WaitForSelectorAsync(selector);
-            //string email = "hgalan@axs.com";
-            //await _pageObject.Page.FillAsync(selector, email);
+            string selectorIframe = "#klarna-checkout-iframe";
+            string selectorField = "#billing-email";
+            await _pageObject.Page.WaitForSelectorAsync(selectorIframe);
+            string email = "hgalan@axs.com";
+            await _pageObject.Page.FrameLocator(selectorIframe).Locator(selectorField).FillAsync(email);
         }
-
 
         [When(@"write my post")]
         public async Task WhenWriteMyPostAsync()
         {
-            //string selector = "billing-postal_code";
-            //string post = "61138";
-            //await _pageObject.Page.FillAsync(selector, post);
-        }
+            string selectorIframe = "#klarna-checkout-iframe";
+            string selectorField = "#billing-postal_code";
 
-        [When(@"press the button '([^']*)' in Klarna checkout")]
-        public void WhenPressTheButtonInKlarnaCheckout(string fORTSÄTT)
-        {
-            
+            await _pageObject.Page.WaitForSelectorAsync(selectorIframe);
+            string post = "61138";
+            await _pageObject.Page.FrameLocator(selectorIframe).Locator(selectorField).FillAsync(post);
+            await _pageObject.Page.Keyboard.PressAsync("Tab");
         }
 
         [When(@"press the button '([^']*)' to continue Klarna checkout")]
-        public void WhenPressTheButtonToContinueKlarnaCheckout(string p0)
+        public async Task WhenPressTheButtonToContinueKlarnaCheckout(string buttonPayPurchase)
         {
-            
+            string selector = $"button:has-text('Betala köp')";
+            string iFrameSelector = $"#klarna-checkout-iframe";
+
+            await _pageObject.Page.WaitForSelectorAsync(iFrameSelector);
+            await _pageObject.Page.FrameLocator(iFrameSelector).Locator(selector).ClickAsync();
         }
 
         [When(@"press the button '([^']*)' to finish the purchase")]
-        public void WhenPressTheButtonToFinishThePurchase(string p0)
+        public async Task WhenPressTheButtonToFinishThePurchase(string payment)
         {
-            
+            //string paymentSelector = $"button:has-text('Betala {payment} kr idag med K.')";
+            string iFrameSelector = $"#klarna-checkout-iframe";
+            string bankIDselector = $"button#signInWithBankId[data-testid='kaf-button']";
+
+            await _pageObject.Page.WaitForSelectorAsync(iFrameSelector);
+            //await _pageObject.Page.FrameLocator(iFrameSelector).Locator(paymentSelector).ClickAsync();
+            await _pageObject.Page.FrameLocator(iFrameSelector).Locator(bankIDselector).ClickAsync();
         }
 
         [Then(@"I get to the success page '([^']*)'")]
