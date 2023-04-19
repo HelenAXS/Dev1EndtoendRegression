@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.Playwright.MSTest" Version="1.32.0" />
     <PackageReference Include="Microsoft.Playwright.TestAdapter" Version="1.32.0" />
     <PackageReference Include="SpecFlow" Version="3.9.74" />
+    <PackageReference Include="SpecFlow.Actions.Playwright" Version="0.1.285" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
     <PackageReference Include="SpecFlow.MsTest" Version="3.9.74" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />

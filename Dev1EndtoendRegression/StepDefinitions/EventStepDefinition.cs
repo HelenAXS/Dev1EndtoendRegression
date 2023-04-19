@@ -1,6 +1,5 @@
 ﻿using Dev1EndtoendRegression.Objects;
 using Microsoft.Playwright;
-using Microsoft.Playwright.Helpers;
 
 
 namespace Dev1EndtoendRegression.StepDefinitions
@@ -54,6 +53,28 @@ namespace Dev1EndtoendRegression.StepDefinitions
         {
             string selector = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash:text('Gå vidare')";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+
+            //string selector = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash:text('Gå vidare')";
+            //bool isVisible = await _pageObject.IsElementVisibleAsync(_pageObject.Page, selector);
+
+            //if (!string.IsNullOrEmpty(goFurther))
+            //{
+            //    if (isVisible)
+            //    {
+            //        string mapSelector = $"*[@id=\"ChooseSection-Component\"]";
+            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(mapSelector);
+
+            //        string seatSelector = $"*[@id=\"ChooseSeats-Component\"]";
+            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(seatSelector);
+
+
+            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            //    }
+            //    else
+            //    {
+            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            //    }
+            //}
         }
 
         [When(@"write my e-mail")]
@@ -91,20 +112,76 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [When(@"press the button '([^']*)' to finish the purchase")]
         public async Task WhenPressTheButtonToFinishThePurchase(string payment)
         {
-            //string paymentSelector = $"button:has-text('Betala {payment} kr idag med K.')";
-            string iFrameSelector = $"#klarna-checkout-iframe";
-            string bankIDselector = $"button#signInWithBankId[data-testid='kaf-button']";
+            var page = _pageObject.Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
+            await page.ClickAsync($"#signInWithBankId");
+        }
 
-            await _pageObject.Page.WaitForSelectorAsync(iFrameSelector);
-            //await _pageObject.Page.FrameLocator(iFrameSelector).Locator(paymentSelector).ClickAsync();
-            await _pageObject.Page.FrameLocator(iFrameSelector).Locator(bankIDselector).ClickAsync();
+        [When(@"press the button '([^']*)' to go further")]
+        public async Task WhenPressTheButtonToGoFurtherAsync(string kPoint)
+        {
+            var page = _pageObject.Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
+            await page.ClickAsync($"[data-testid='confirm-and-pay']");
+        }
+
+        [When(@"press the button '([^']*)' do choose the faster payment method")]
+        public async Task WhenPressTheButtonDoChooseTheFasterPaymentMethodAsync(string p0)
+        {
+            var page = _pageObject.Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
+            await page.ClickAsync($"[data-testid='SmoothCheckoutPopUp:enable']");
         }
 
         [Then(@"I get to the success page '([^']*)'")]
-        public void ThenIGetToTheSuccessPage(string p0)
+        public async Task ThenIGetToTheSuccessPageAsync(string successPage)
         {
-            
+            await _pageObject.Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+                       
+            var expectedUrl = "https://web4.1.dev.tt.eu.axs.com/Checkout/KlarnaSuccess";
+            var actualUrl = _pageObject.Page.Url;
+
+            Assert.IsTrue(actualUrl.Contains(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
+
+            //var expectedText = "h1.role:heading, Ditt köp har genomförts!";
+            //var actualText = await _pageObject.Page.TextContentAsync("body");
+            //Assert.IsTrue(actualText.Contains(expectedText), $"Expected text: {expectedText}, Actual text: {actualText}");
+
+            //var expectedText = "Ditt köp har genomförts!";
+            //var selector = "h1[role='heading'][aria-level='1']";
+            //var actualText = await _pageObject.Page.TextContentAsync(selector);
+            //Assert.IsTrue(actualText.Contains(expectedText), $"Expected text: {expectedText}, Actual text: {actualText}");
+
+            //var expectedText = "Ditt köp har genomförts!";
+            //var selector = "h1[role='heading'][aria-level='1']";
+            //await _pageObject.Page.WaitForSelectorAsync(selector);
+            //var element = await _pageObject.Page.QuerySelectorAsync(selector);
+            //var actualText = await element.TextContentAsync();
+            //Assert.IsTrue(actualText.Contains(expectedText), $"Expected text: {expectedText}, Actual text: {actualText}");
+
+            //var expectedText = "Ditt köp har genomförts!";
+            //var selector = "h1[role='heading'][aria-level='1']";
+            //await _pageObject.Page.WaitForSelectorAsync(selector);
+            //var element = await _pageObject.Page.QuerySelectorAsync(selector);
+            //string actualText = null;
+            //while (string.IsNullOrEmpty(actualText))
+            //{
+            //    actualText = await element.TextContentAsync();
+            //    await Task.Delay(1000); // wait for 1 second before trying again
+            //}
+            //Assert.IsTrue(actualText.Contains(expectedText), $"Expected text: {expectedText}, Actual text: {actualText}");
+
+            //await Expected(_pageObject.Page.GetByRole(AriaRole.Heading, new() { Name = "Ditt köp har genomförts!" })).ToBeVisibleAsync();
+
+            //var textInPage = await _pageObject();
+            //textInPage.Should().Be("Ditt köp har genomförts!");
+
+
+
+            //var successMessage = await _pageObject.GetSuccessPageAsync();
+            //successMessage.Should().Be("Ditt köp har genomförts!");
+
+
         }
 
     }
+
+    
 }

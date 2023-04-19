@@ -137,9 +137,15 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("press the button \'BETALA KÖP\' to continue Klarna checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
- testRunner.And("press the button \'BETALA {0} KR IDAG MED K.\' to finish the purchase", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("press the button \'FORTSÄTT MED BANKID\' to finish the purchase", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 16
+ testRunner.And("press the button \'BETALA MED K.\' to go further", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 17
+ testRunner.And("press the button \'VÄLJ SNABBARE BETALNING\' do choose the faster payment method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 18
  testRunner.Then("I get to the success page \'https://web4.1.dev.tt.eu.axs.com/Checkout/KlarnaSucces" +
                         "s/ ...\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

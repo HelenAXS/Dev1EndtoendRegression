@@ -27,7 +27,14 @@ namespace Dev1EndtoendRegression.Objects
             await element.ClickAsync();
         }
 
+        //public async Task<bool> IsElementVisibleAsync(IPage page, string selector)
+        //{
+        //    string jsExpression = $"!!document.querySelector('{selector}').offsetParent";
+        //    bool isVisible = await page.EvaluateAsync<bool>(jsExpression);
+        //    return isVisible;
+        //}
 
+        public Task<string> GetSuccessPageAsync() => Page.InnerTextAsync("#section-header__content");
 
     }
 }
