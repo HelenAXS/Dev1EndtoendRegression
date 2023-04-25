@@ -1,16 +1,20 @@
 ﻿using Dev1EndtoendRegression.Objects;
 using Microsoft.Playwright;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//[assembly: Parallelize(Scope = ExecutionScope.ClassLevel)]
 namespace Dev1EndtoendRegression.StepDefinitions
 {
     [Binding]
-    [Scope(Tag = "event")]
-    internal class EventStepDefinition
+    [Scope(Tag = "product")]
+    internal class ProductStepDefinition
     {
         private readonly PageObject _pageObject;
 
-        public EventStepDefinition(PageObject pageObject)
+        public ProductStepDefinition(PageObject pageObject)
         {
             _pageObject = pageObject;
         }
@@ -22,64 +26,42 @@ namespace Dev1EndtoendRegression.StepDefinitions
         }
 
         [Given(@"I press the menu '([^']*)'")]
-        public async Task GivenIPressTheMenuAsync(string matches)
+        public async Task GivenIPressTheMenuAsync(string pRODUKTER)
         {
-            string selector = $".nav-desktop a[href='/List/Events']";
+            string selector = $".nav-desktop a[href='/Products']";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
-        [When(@"I press the button '([^']*)'")]
-        public async Task WhenIPressTheButtonAsync(string buyTicket)
+        [When(@"I press '([^']*)' to buy a product")]
+        public async Task WhenIPressToBuyAProductAsync(string kÖP)
         {
-            string selector = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=332&IsSeason=False']";
+            string selector = $"button.modaltrigger[data-target='buyModal-210']";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
-        [When(@"I select a ticket type by pressing the button '([^']*)' once for one ticket")]
-        public async Task WhenISelectATicketTypeByPressingTheButtonOnceForOneTicketAsync(string pressPlus)
+        [When(@"I press '([^']*)' to keep buying")]
+        public async Task WhenIPressToKeepBuyingAsync(string keepBuying)
         {
-            string selector = $"button:text('+')";
+            string selector = $"#buyModal-210 button[name='productsubmit']";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
-        [When(@"I press the button '([^']*)' to find the seats")]
-        public async Task WhenIPressTheButtonToFindTheSeats(string findSeats)
+        [When(@"I press '([^']*)' to buy a product again")]
+        public async Task WhenIPressToBuyAProductAgainAsync(string kÖP)
         {
-            string selector = $"a.link-btn-regular.btn-find-tickets";
+            string selector = $"button.modaltrigger[data-target='buyModal-274']";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
-        [When(@"press the button '([^']*)' to the cart")]
-        public async Task WhenPressTheButtonToTheCart(string goFurther)
+        [When(@"I press '([^']*)' to proceed to cart")]
+        public async Task WhenIPressToProceedToCartAsync(string goFurther)
         {
-            string selector = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash:text('Gå vidare')";
+            string selector = $"#buyModal-274 button[name='productsubmit']:text('Gå vidare')";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
-
-            //string selector = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash:text('Gå vidare')";
-            //bool isVisible = await _pageObject.IsElementVisibleAsync(_pageObject.Page, selector);
-
-            //if (!string.IsNullOrEmpty(goFurther))
-            //{
-            //    if (isVisible)
-            //    {
-            //        string mapSelector = $"*[@id=\"ChooseSection-Component\"]";
-            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(mapSelector);
-
-            //        string seatSelector = $"*[@id=\"ChooseSeats-Component\"]";
-            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(seatSelector);
-
-
-            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
-            //    }
-            //    else
-            //    {
-            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
-            //    }
-            //}
         }
-
+        
         [When(@"write my e-mail")]
-        public async Task WhenWriteMyE_MailAsync()
+        public async Task WhenWriteMyE_Mail()
         {
             string selectorIframe = "#klarna-checkout-iframe";
             string selectorField = "#billing-email";
@@ -100,8 +82,9 @@ namespace Dev1EndtoendRegression.StepDefinitions
             await _pageObject.Page.Keyboard.PressAsync("Tab");
         }
 
+
         [When(@"press the button '([^']*)' to continue Klarna checkout")]
-        public async Task WhenPressTheButtonToContinueKlarnaCheckout(string buttonPayPurchase)
+        public async Task WhenPressTheButtonToContinueKlarnaCheckoutAsync(string p0)
         {
             string selector = $"button:has-text('Betala köp')";
             string iFrameSelector = $"#klarna-checkout-iframe";
@@ -111,14 +94,14 @@ namespace Dev1EndtoendRegression.StepDefinitions
         }
 
         [When(@"press the button '([^']*)' to finish the purchase")]
-        public async Task WhenPressTheButtonToFinishThePurchase(string payment)
+        public async Task WhenPressTheButtonToFinishThePurchaseAsync(string p0)
         {
             var page = _pageObject.Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
             await page.ClickAsync($"#signInWithBankId");
         }
 
         [When(@"press the button '([^']*)' to go further")]
-        public async Task WhenPressTheButtonToGoFurtherAsync(string kPoint)
+        public async Task WhenPressTheButtonToGoFurtherAsync(string p0)
         {
             var page = _pageObject.Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
             await page.ClickAsync($"[data-testid='confirm-and-pay']");
@@ -132,7 +115,7 @@ namespace Dev1EndtoendRegression.StepDefinitions
         }
 
         [Then(@"I get to the success page '([^']*)'")]
-        public async Task ThenIGetToTheSuccessPageAsync(string successPage)
+        public async Task ThenIGetToTheSuccessPageAsync(string p0)
         {
             await Task.Delay(20000);
 
@@ -174,5 +157,6 @@ namespace Dev1EndtoendRegression.StepDefinitions
                 Assert.IsTrue(actualUrl.Contains(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
             }
         }
+
     }
 }

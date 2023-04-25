@@ -1,16 +1,16 @@
 ﻿using Dev1EndtoendRegression.Objects;
 using Microsoft.Playwright;
 
-//[assembly: Parallelize(Scope = ExecutionScope.ClassLevel)]
+
 namespace Dev1EndtoendRegression.StepDefinitions
 {
     [Binding]
-    [Scope(Tag = "event")]
-    internal class EventStepDefinition
+    [Scope(Tag = "season")]
+    internal class SeasonStepDefinition
     {
         private readonly PageObject _pageObject;
 
-        public EventStepDefinition(PageObject pageObject)
+        public SeasonStepDefinition(PageObject pageObject)
         {
             _pageObject = pageObject;
         }
@@ -24,14 +24,14 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [Given(@"I press the menu '([^']*)'")]
         public async Task GivenIPressTheMenuAsync(string matches)
         {
-            string selector = $".nav-desktop a[href='/List/Events']";
+            string selector = $".nav-desktop a[href='/List/Seasons']";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
         [When(@"I press the button '([^']*)'")]
         public async Task WhenIPressTheButtonAsync(string buyTicket)
         {
-            string selector = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=332&IsSeason=False']";
+            string selector = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=63&IsSeason=True']";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
@@ -45,7 +45,7 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [When(@"I press the button '([^']*)' to find the seats")]
         public async Task WhenIPressTheButtonToFindTheSeats(string findSeats)
         {
-            string selector = $"a.link-btn-regular.btn-find-tickets";
+            string selector = $"a.link-btn-regular.btn-find-tickets:text('Hitta 1 Biljett(er)')";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
@@ -173,6 +173,60 @@ namespace Dev1EndtoendRegression.StepDefinitions
                 // At this point, actualUrl contains expectedUrl
                 Assert.IsTrue(actualUrl.Contains(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
             }
+
+
+
+
+
+
+            //working sometimes
+            //await _pageObject.Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+
+            //var finalExpected = "https://web4.1.dev.tt.eu.axs.com/Cart";
+            //var expectedUrl = "https://web4.1.dev.tt.eu.axs.com/Checkout/KlarnaSuccess";
+            //var actualUrl = _pageObject.Page.Url;
+
+            //Assert.IsTrue(actualUrl.Contains(finalExpected), $"Expected URL: {finalExpected}, Actual URL: {actualUrl}");
+            //Assert.IsTrue(actualUrl.Contains(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
+            //
+
+            //var expectedText = "h1.role:heading, Ditt köp har genomförts!";
+            //var actualText = await _pageObject.Page.TextContentAsync("body");
+            //Assert.IsTrue(actualText.Contains(expectedText), $"Expected text: {expectedText}, Actual text: {actualText}");
+
+            //var expectedText = "Ditt köp har genomförts!";
+            //var selector = "h1[role='heading'][aria-level='1']";
+            //var actualText = await _pageObject.Page.TextContentAsync(selector);
+            //Assert.IsTrue(actualText.Contains(expectedText), $"Expected text: {expectedText}, Actual text: {actualText}");
+
+            //var expectedText = "Ditt köp har genomförts!";
+            //var selector = "h1[role='heading'][aria-level='1']";
+            //await _pageObject.Page.WaitForSelectorAsync(selector);
+            //var element = await _pageObject.Page.QuerySelectorAsync(selector);
+            //var actualText = await element.TextContentAsync();
+            //Assert.IsTrue(actualText.Contains(expectedText), $"Expected text: {expectedText}, Actual text: {actualText}");
+
+            //var expectedText = "Ditt köp har genomförts!";
+            //var selector = "h1[role='heading'][aria-level='1']";
+            //await _pageObject.Page.WaitForSelectorAsync(selector);
+            //var element = await _pageObject.Page.QuerySelectorAsync(selector);
+            //string actualText = null;
+            //while (string.IsNullOrEmpty(actualText))
+            //{
+            //    actualText = await element.TextContentAsync();
+            //    await Task.Delay(1000); // wait for 1 second before trying again
+            //}
+            //Assert.IsTrue(actualText.Contains(expectedText), $"Expected text: {expectedText}, Actual text: {actualText}");
+
+            //await Expected(_pageObject.Page.GetByRole(AriaRole.Heading, new() { Name = "Ditt köp har genomförts!" })).ToBeVisibleAsync();
+
+            //var textInPage = await _pageObject();
+            //textInPage.Should().Be("Ditt köp har genomförts!");
+
+
+
+            //var successMessage = await _pageObject.GetSuccessPageAsync();
+            //successMessage.Should().Be("Ditt köp har genomförts!");
         }
     }
 }

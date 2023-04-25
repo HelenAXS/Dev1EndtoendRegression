@@ -20,7 +20,7 @@ namespace Dev1EndtoendRegression.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class EventPurchaseFlowFeature
+    public partial class SeasonPurchaseFlowFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,9 +28,9 @@ namespace Dev1EndtoendRegression.Features
         private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
         private static string[] featureTags = new string[] {
-                "event"};
+                "season"};
         
-#line 1 "EventPurchaseFeature.feature"
+#line 1 "SeasonPurchaseFeature.feature"
 #line hidden
         
         public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
@@ -49,7 +49,7 @@ namespace Dev1EndtoendRegression.Features
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Event Purchase Flow", "An end-to-end or regression test for purchasing an event in dev1", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Season Purchase Flow", "An end-to-end or regression test for purchasing an event in dev1", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -64,9 +64,9 @@ namespace Dev1EndtoendRegression.Features
         public void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Event Purchase Flow")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "Season Purchase Flow")))
             {
-                global::Dev1EndtoendRegression.Features.EventPurchaseFlowFeature.FeatureSetup(null);
+                global::Dev1EndtoendRegression.Features.SeasonPurchaseFlowFeature.FeatureSetup(null);
             }
         }
         
@@ -93,14 +93,14 @@ namespace Dev1EndtoendRegression.Features
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Buying an event ticket")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Event Purchase Flow")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("event")]
-        public void BuyingAnEventTicket()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Buying a season ticket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Season Purchase Flow")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("season")]
+        public void BuyingASeasonTicket()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Buying an event ticket", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Buying a season ticket", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -115,7 +115,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am in dev", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.And("I press the menu \'MATCHER\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I press the menu \'SÄSONGER\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
  testRunner.When("I press the button \'KÖP BILJETT\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
