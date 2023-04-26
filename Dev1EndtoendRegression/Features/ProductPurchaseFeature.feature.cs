@@ -129,27 +129,8 @@ this.ScenarioInitialize(scenarioInfo);
 #line 11
  testRunner.And("I press \'Gå vidare\' to proceed to cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 13
- testRunner.And("write my e-mail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 14
- testRunner.And("write my post", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 15
- testRunner.And("press the button \'BETALA KÖP\' to continue Klarna checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 16
- testRunner.And("press the button \'FORTSÄTT MED BANKID\' to finish the purchase", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 17
- testRunner.And("press the button \'BETALA MED K.\' to go further", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 18
- testRunner.And("press the button \'VÄLJ SNABBARE BETALNING\' do choose the faster payment method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 19
- testRunner.Then("I get to the success page \'https://web4.1.dev.tt.eu.axs.com/Checkout/KlarnaSucces" +
-                        "s/ ...\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 12
+ testRunner.Then("I get to the whole Klana flow until the succeed page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

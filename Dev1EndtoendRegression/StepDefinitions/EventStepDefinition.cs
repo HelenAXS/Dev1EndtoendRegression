@@ -78,101 +78,10 @@ namespace Dev1EndtoendRegression.StepDefinitions
             //}
         }
 
-        [When(@"write my e-mail")]
-        public async Task WhenWriteMyE_MailAsync()
+        [Then(@"I get to the whole Klana flow until the succeed page")]
+        public async Task ThenIGetToTheWholeKlanaFlowUntilTheSucceedPage()
         {
-            string selectorIframe = "#klarna-checkout-iframe";
-            string selectorField = "#billing-email";
-            await _pageObject.Page.WaitForSelectorAsync(selectorIframe);
-            string email = "hgalan@axs.com";
-            await _pageObject.Page.FrameLocator(selectorIframe).Locator(selectorField).FillAsync(email);
-        }
-
-        [When(@"write my post")]
-        public async Task WhenWriteMyPostAsync()
-        {
-            string selectorIframe = "#klarna-checkout-iframe";
-            string selectorField = "#billing-postal_code";
-
-            await _pageObject.Page.WaitForSelectorAsync(selectorIframe);
-            string post = "61138";
-            await _pageObject.Page.FrameLocator(selectorIframe).Locator(selectorField).FillAsync(post);
-            await _pageObject.Page.Keyboard.PressAsync("Tab");
-        }
-
-        [When(@"press the button '([^']*)' to continue Klarna checkout")]
-        public async Task WhenPressTheButtonToContinueKlarnaCheckout(string buttonPayPurchase)
-        {
-            string selector = $"button:has-text('Betala köp')";
-            string iFrameSelector = $"#klarna-checkout-iframe";
-
-            await _pageObject.Page.WaitForSelectorAsync(iFrameSelector);
-            await _pageObject.Page.FrameLocator(iFrameSelector).Locator(selector).ClickAsync();
-        }
-
-        [When(@"press the button '([^']*)' to finish the purchase")]
-        public async Task WhenPressTheButtonToFinishThePurchase(string payment)
-        {
-            var page = _pageObject.Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
-            await page.ClickAsync($"#signInWithBankId");
-        }
-
-        [When(@"press the button '([^']*)' to go further")]
-        public async Task WhenPressTheButtonToGoFurtherAsync(string kPoint)
-        {
-            var page = _pageObject.Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
-            await page.ClickAsync($"[data-testid='confirm-and-pay']");
-        }
-
-        [When(@"press the button '([^']*)' do choose the faster payment method")]
-        public async Task WhenPressTheButtonDoChooseTheFasterPaymentMethodAsync(string p0)
-        {
-            var page = _pageObject.Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
-            await page.ClickAsync($"[data-testid='SmoothCheckoutPopUp:enable']");
-        }
-
-        [Then(@"I get to the success page '([^']*)'")]
-        public async Task ThenIGetToTheSuccessPageAsync(string successPage)
-        {
-            await Task.Delay(20000);
-
-            await _pageObject.Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
-
-            var expectedUrl = "https://web4.1.dev.tt.eu.axs.com/Checkout/KlarnaSuccess";
-            var actualUrl = _pageObject.Page.Url;
-
-            if (actualUrl.Contains(expectedUrl))
-            {
-                // Expected URL loaded directly, so no need to wait for Cart page
-                Assert.IsTrue(actualUrl.Contains(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
-            }
-            else
-            {
-                var cartBetweenExpectedUrl = "https://web4.1.dev.tt.eu.axs.com/Cart";
-
-                // Wait for Cart page to load
-                while (actualUrl.Contains(cartBetweenExpectedUrl))
-                {
-                    // Handle unexpected URLs
-                    if (!actualUrl.Contains(cartBetweenExpectedUrl))
-                    {
-                        Assert.Fail($"Unexpected URL: {actualUrl}");
-                    }
-
-                    await Task.Delay(20000);
-                    actualUrl = _pageObject.Page.Url;
-                }
-
-                // Wait for KlarnaSuccess page to load
-                while (!actualUrl.Contains(cartBetweenExpectedUrl))
-                {
-                    await Task.Delay(20000);
-                    actualUrl = _pageObject.Page.Url;
-                }
-
-                // At this point, actualUrl contains expectedUrl
-                Assert.IsTrue(actualUrl.Contains(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
-            }
+            await _pageObject.KlarnaPayment();
         }
     }
 }

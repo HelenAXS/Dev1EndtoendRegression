@@ -27,14 +27,82 @@ namespace Dev1EndtoendRegression.Objects
             await element.ClickAsync();
         }
 
-        //public async Task<bool> IsElementVisibleAsync(IPage page, string selector)
-        //{
-        //    string jsExpression = $"!!document.querySelector('{selector}').offsetParent";
-        //    bool isVisible = await page.EvaluateAsync<bool>(jsExpression);
-        //    return isVisible;
-        //}
+        public async Task KlarnaPayment()
+        {
+            string selectorIframe = "#klarna-checkout-iframe";
+            string selectorFieldEmail = "#billing-email";
+            await Page.WaitForSelectorAsync(selectorIframe);
+            string email = "hgalan@axs.com";
+            await Page.FrameLocator(selectorIframe).Locator(selectorFieldEmail).FillAsync(email);
 
-        public Task<string> GetSuccessPageAsync() => Page.InnerTextAsync("#section-header__content");
 
+            string selectorFieldPostal = "#billing-postal_code";
+
+
+            await Page.WaitForSelectorAsync(selectorIframe);
+            string post = "61138";
+            await Page.FrameLocator(selectorIframe).Locator(selectorFieldPostal).FillAsync(post);
+            await Page.Keyboard.PressAsync("Tab");
+
+
+            string selector = $"button:has-text('Betala köp')";
+            string iFrameSelector = $"#klarna-checkout-iframe";
+
+            await Page.WaitForSelectorAsync(iFrameSelector);
+            await Page.FrameLocator(iFrameSelector).Locator(selector).ClickAsync();
+
+
+            var pageBankId = Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
+            await pageBankId.ClickAsync($"#signInWithBankId");
+
+
+            var pageConfirm = Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
+            await pageConfirm.ClickAsync($"[data-testid='confirm-and-pay']");
+
+
+            var pageSmoth = Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
+            await pageSmoth.ClickAsync($"[data-testid='SmoothCheckoutPopUp:enable']");
+
+
+            await Task.Delay(20000);
+
+            await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+
+            var expectedUrl = "https://web4.1.dev.tt.eu.axs.com/Checkout/KlarnaSuccess";
+            var actualUrl = Page.Url;
+
+            if (actualUrl.Contains(expectedUrl))
+            {
+                // Expected URL loaded directly, so no need to wait for Cart page
+                Assert.IsTrue(actualUrl.Contains(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
+            }
+            else
+            {
+                var cartBetweenExpectedUrl = "https://web4.1.dev.tt.eu.axs.com/Cart";
+
+                // Wait for Cart page to load
+                while (actualUrl.Contains(cartBetweenExpectedUrl))
+                {
+                    // Handle unexpected URLs
+                    if (!actualUrl.Contains(cartBetweenExpectedUrl))
+                    {
+                        Assert.Fail($"Unexpected URL: {actualUrl}");
+                    }
+
+                    await Task.Delay(20000);
+                    actualUrl = Page.Url;
+                }
+
+                // Wait for KlarnaSuccess page to load
+                while (!actualUrl.Contains(cartBetweenExpectedUrl))
+                {
+                    await Task.Delay(20000);
+                    actualUrl = Page.Url;
+                }
+
+                // At this point, actualUrl contains expectedUrl
+                Assert.IsTrue(actualUrl.Contains(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
+            }
+        }
     }
 }
