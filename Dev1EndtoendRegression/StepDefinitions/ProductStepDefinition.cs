@@ -35,14 +35,14 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [When(@"I press '([^']*)' to buy a product")]
         public async Task WhenIPressToBuyAProductAsync(string kÖP)
         {
-            string selector = $"button.modaltrigger[data-target='buyModal-210']";
+            string selector = $"button.modaltrigger[data-target='buyModal-357']";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
         [When(@"I press '([^']*)' to keep buying")]
         public async Task WhenIPressToKeepBuyingAsync(string keepBuying)
         {
-            string selector = $"#buyModal-210 button[name='productsubmit']";
+            string selector = $"#buyModal-357 button[name='productsubmit']";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
@@ -60,8 +60,8 @@ namespace Dev1EndtoendRegression.StepDefinitions
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
-        [Then(@"I get to the whole Klana flow until the succeed page")]
-        public async Task ThenIGetToTheWholeKlanaFlowUntilTheSucceedPage()
+        [Then(@"I get to the whole Klarna flow until the succeed page")]
+        public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPage()
         {
             await _pageObject.KlarnaPayment();
         }
