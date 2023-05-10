@@ -48,11 +48,11 @@ namespace Dev1EndtoendRegression.Objects
             await Page.Keyboard.PressAsync("Tab");
 
             //Press the button in the cart to confirm the purchase
-            string selector = $"button:has-text('Betala köp')";
+            string selector = $"button[data-cid='button.buy_button']";
             await Page.WaitForSelectorAsync(selectorIframe);
             await Page.FrameLocator(selectorIframe).Locator(selector).ClickAsync();
 
-            //Start pop-Up
+            //Start pop-Up LOOP
             var pageBankId = Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
 
             //Press the BankId to continue
@@ -81,11 +81,11 @@ namespace Dev1EndtoendRegression.Objects
            
 
             //Smoth Click to get faster
-            await pageBankId.ClickAsync($"[data-testid='SmoothCheckoutPopUp:enable']");
+            //await pageBankId.ClickAsync($"[data-testid='SmoothCheckoutPopUp:enable']");
 
 
             //Checking the succeed page in dev1
-            await Task.Delay(20000);
+            //await Task.Delay(20000);
 
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
 
