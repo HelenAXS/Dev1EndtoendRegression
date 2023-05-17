@@ -81,7 +81,8 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [Then(@"I get to the whole Klarna flow until the succeed page")]
         public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPage()
         {
-            await _pageObject.KlarnaPayment();
+            string email = "hgalan@axs.com";
+            await _pageObject.KlarnaPaymentAsync(email);
         }
 
     }

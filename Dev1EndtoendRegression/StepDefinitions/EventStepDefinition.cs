@@ -22,38 +22,38 @@ namespace Dev1EndtoendRegression.StepDefinitions
         }
 
         [Given(@"I press the menu '([^']*)'")]
-        public async Task GivenIPressTheMenuAsync(string matches)
+        public async Task GivenIPressTheMenuAsync(string menuMatches)
         {
-            string selector = $".nav-desktop a[href='/List/Events']";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            menuMatches = $".nav-desktop a[href='/List/Events']";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(menuMatches);
         }
 
         [When(@"I press the button '([^']*)'")]
         public async Task WhenIPressTheButtonAsync(string buyTicket)
         {
-            string selector = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=332&IsSeason=False']";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            buyTicket = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=332&IsSeason=False']";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(buyTicket);
         }
 
         [When(@"I select a ticket type by pressing the button '([^']*)' once for one ticket")]
         public async Task WhenISelectATicketTypeByPressingTheButtonOnceForOneTicketAsync(string pressPlus)
         {
-            string selector = $"button:text('+')";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            pressPlus = $"button:text('+')";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(pressPlus);
         }
 
         [When(@"I press the button '([^']*)' to find the seats")]
         public async Task WhenIPressTheButtonToFindTheSeats(string findSeats)
         {
-            string selector = $"a.link-btn-regular.btn-find-tickets";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            findSeats = $"a.link-btn-regular.btn-find-tickets";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(findSeats);
         }
 
         [When(@"press the button '([^']*)' to the cart")]
         public async Task WhenPressTheButtonToTheCart(string goFurther)
         {
-            string selector = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash:text('Gå vidare')";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            goFurther = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash[href='/Cart']:first-of-type";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(goFurther);
 
             //string selector = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash:text('Gå vidare')";
             //bool isVisible = await _pageObject.IsElementVisibleAsync(_pageObject.Page, selector);
@@ -81,7 +81,8 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [Then(@"I get to the whole Klarna flow until the succeed page")]
         public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPage()
         {
-            await _pageObject.KlarnaPayment();
+            string email = "hgalan@axs.com";
+            await _pageObject.KlarnaPaymentAsync(email);
         }
     }
 }

@@ -186,7 +186,7 @@ namespace Dev1EndtoendRegression.StepDefinitions
         public async Task WhenIWriteTheE_MailForLoginAsync()
         {
             string selector = "#email";
-            string email = "hgalan@axs.com";
+            string email = "hgalan+automation@axs.com";
             await _pageObject.Page.Locator(selector).FillAsync(email);
         }
 
