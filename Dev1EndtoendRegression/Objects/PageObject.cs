@@ -36,7 +36,9 @@ namespace Dev1EndtoendRegression.Objects
             //Write the e-mail in Klarna field
             string selectorFieldEmail = "#billing-email";
             await Page.WaitForSelectorAsync(selectorIframe);
+            await Task.Delay(2000);
             await Page.FrameLocator(selectorIframe).Locator(selectorFieldEmail).FillAsync(email);
+
 
 
             //Write the postal in KLarna field
@@ -52,10 +54,8 @@ namespace Dev1EndtoendRegression.Objects
             await Page.WaitForSelectorAsync(selectorIframe);
             await Page.FrameLocator(selectorIframe).Locator(selector).ClickAsync();
 
-            //Start pop-Up LOOP
-            var pageBankId = Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
-
             //Press the BankId to continue
+            var pageBankId = Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
             await pageBankId.ClickAsync("#signInWithBankId");
 
             //Managing different flows of Klarna
@@ -107,14 +107,7 @@ namespace Dev1EndtoendRegression.Objects
                         Assert.Fail($"Unexpected URL: {actualUrl}");
                     }
 
-                    await Task.Delay(20000);
-                    actualUrl = Page.Url;
-                }
-
-                // Wait for KlarnaSuccess page to load
-                while (!actualUrl.Contains(cartBetweenExpectedUrl))
-                {
-                    await Task.Delay(20000);
+                    await Task.Delay(5000);
                     actualUrl = Page.Url;
                 }
 
@@ -326,8 +319,5 @@ namespace Dev1EndtoendRegression.Objects
             }
 
         }
-
-
-
     }
 }

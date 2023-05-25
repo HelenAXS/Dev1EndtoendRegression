@@ -49,33 +49,25 @@ namespace Dev1EndtoendRegression.StepDefinitions
             await _pageObject.ClickButtonsAndMenuOptionsAsync(findSeats);
         }
 
-        [When(@"press the button '([^']*)' to the cart")]
-        public async Task WhenPressTheButtonToTheCart(string goFurther)
+        [When(@"press the one section on the map")]
+        public async Task WhenPressTheOneSectionOnTheMapAsync()
         {
-            goFurther = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash[href='/Cart']:first-of-type";
+            string sectionSelector = $"#svgareamap #SektionF";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(sectionSelector);
+        }
+
+        [When(@"press the one seat on the map")]
+        public async Task WhenPressTheOneSeatOnTheMapAsync()
+        {
+            string sectionSelector = $"#svg g[data-id='F/1/23'][id='F-1-23']";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(sectionSelector);
+        }
+
+        [When(@"press the button to select a seat")]
+        public async Task WhenPressTheButtonToSelectASeatAsync()
+        {
+            string goFurther = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash[href='/Cart']:first-of-type";
             await _pageObject.ClickButtonsAndMenuOptionsAsync(goFurther);
-
-            //string selector = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash:text('Gå vidare')";
-            //bool isVisible = await _pageObject.IsElementVisibleAsync(_pageObject.Page, selector);
-
-            //if (!string.IsNullOrEmpty(goFurther))
-            //{
-            //    if (isVisible)
-            //    {
-            //        string mapSelector = $"*[@id=\"ChooseSection-Component\"]";
-            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(mapSelector);
-
-            //        string seatSelector = $"*[@id=\"ChooseSeats-Component\"]";
-            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(seatSelector);
-
-
-            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
-            //    }
-            //    else
-            //    {
-            //        await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
-            //    }
-            //}
         }
 
         [Then(@"I get to the whole Klarna flow until the succeed page")]
