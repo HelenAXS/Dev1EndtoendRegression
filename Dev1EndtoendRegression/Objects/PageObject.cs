@@ -49,10 +49,9 @@ namespace Dev1EndtoendRegression.Objects
             await Page.Keyboard.PressAsync("Tab");
 
             //Press the button in the cart to confirm the purchase
-            string selector = $"button[data-cid='button.buy_button']";
-
+            string selectorBuyButton = $"button[data-cid='button.buy_button']";
             await Page.WaitForSelectorAsync(selectorIframe);
-            await Page.FrameLocator(selectorIframe).Locator(selector).ClickAsync();
+            await Page.FrameLocator(selectorIframe).Locator(selectorBuyButton).ClickAsync();
 
             //Press the BankId to continue
             var pageBankId = Page.Context.Pages.FirstOrDefault(x => x.Url.Contains("payments.playground.klarna.com"));
@@ -82,7 +81,6 @@ namespace Dev1EndtoendRegression.Objects
 
 
             //Checking the succeed page in dev1
-            //await Task.Delay(20000);
 
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
 
