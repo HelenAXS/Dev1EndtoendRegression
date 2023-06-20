@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Dev1EndtoendRegression.Objects
 {
@@ -27,6 +28,18 @@ namespace Dev1EndtoendRegression.Objects
             await element.ClickAsync();
         }
 
+        public async Task<bool> HasElementAsync(string availableSelector)
+        {
+            try
+            {
+                await Page.WaitForSelectorAsync(availableSelector);
+                return true;
+            }
+            catch (TimeoutException)
+            {
+                return false;
+            }
+        }
         public async Task KlarnaPaymentAsync(string email)
         {
 

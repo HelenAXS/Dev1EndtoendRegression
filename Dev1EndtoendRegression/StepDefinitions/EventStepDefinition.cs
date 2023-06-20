@@ -59,8 +59,64 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [When(@"press the one seat on the map")]
         public async Task WhenPressTheOneSeatOnTheMapAsync()
         {
-            string sectionSelector = $"#svg g[data-id='F/1/23'][id='F-1-23']";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(sectionSelector);
+            string[] seatSelectors = new string[]
+            {
+            "#svg g[data-id='F/9/38'][id='F-9-38']",
+            "#svg g[data-id='F/8/38'][id='F-8-38']",
+            "#svg g[data-id='F/7/38'][id='F-7-38']",
+            "#svg g[data-id='F/6/38'][id='F-6-38']",
+            "#svg g[data-id='F/5/38'][id='F-5-38']",
+            "#svg g[data-id='F/4/38'][id='F-4-38']",
+            "#svg g[data-id='F/3/38'][id='F-3-38']",
+            "#svg g[data-id='F/2/38'][id='F-2-38']",
+            "#svg g[data-id='F/1/38'][id='F-1-38']",
+
+            "#svg g[data-id='F/9/39'][id='F-9-39']",
+            "#svg g[data-id='F/8/39'][id='F-8-39']",
+            "#svg g[data-id='F/7/39'][id='F-7-39']",
+            "#svg g[data-id='F/6/39'][id='F-6-39']",
+            "#svg g[data-id='F/5/39'][id='F-5-39']",
+            "#svg g[data-id='F/4/39'][id='F-4-39']",
+            "#svg g[data-id='F/3/39'][id='F-3-39']",
+            "#svg g[data-id='F/2/39'][id='F-2-39']",
+            "#svg g[data-id='F/1/39'][id='F-1-39']",
+
+            "#svg g[data-id='F/9/40'][id='F-9-40']",
+            "#svg g[data-id='F/8/40'][id='F-8-40']",
+            "#svg g[data-id='F/7/40'][id='F-7-40']",
+            "#svg g[data-id='F/6/40'][id='F-6-40']",
+            "#svg g[data-id='F/5/40'][id='F-5-40']",
+            "#svg g[data-id='F/4/40'][id='F-4-40']",
+            "#svg g[data-id='F/3/40'][id='F-3-40']",
+            "#svg g[data-id='F/2/40'][id='F-2-40']",
+            "#svg g[data-id='F/1/40'][id='F-1-40']",
+
+            "#svg g[data-id='F/9/45'][id='F-9-45']",
+            "#svg g[data-id='F/8/45'][id='F-8-45']",
+            "#svg g[data-id='F/7/45'][id='F-7-45']",
+            "#svg g[data-id='F/6/45'][id='F-6-45']",
+            "#svg g[data-id='F/5/45'][id='F-5-45']",
+            "#svg g[data-id='F/4/45'][id='F-4-45']",
+            "#svg g[data-id='F/3/45'][id='F-3-45']",
+            "#svg g[data-id='F/2/45'][id='F-2-45']",
+            "#svg g[data-id='F/1/45'][id='F-1-45']"
+            };
+
+            foreach (string seatSelector in seatSelectors)
+            {
+                if (await _pageObject.HasElementAsync(seatSelector))
+                {
+                    await _pageObject.ClickButtonsAndMenuOptionsAsync(seatSelector);
+
+                    string goFurther = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash[href='/Cart']:first-of-type";
+                    if (await _pageObject.HasElementAsync(goFurther))
+                    {
+                        await _pageObject.ClickButtonsAndMenuOptionsAsync(seatSelector);
+                    }
+                    break;
+
+                }
+            }
         }
 
         [When(@"press the button to select a seat")]
