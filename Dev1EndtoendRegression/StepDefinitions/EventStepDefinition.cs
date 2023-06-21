@@ -70,7 +70,6 @@ namespace Dev1EndtoendRegression.StepDefinitions
             "#svg g[data-id='F/3/38'][id='F-3-38']",
             "#svg g[data-id='F/2/38'][id='F-2-38']",
             "#svg g[data-id='F/1/38'][id='F-1-38']",
-
             "#svg g[data-id='F/9/39'][id='F-9-39']",
             "#svg g[data-id='F/8/39'][id='F-8-39']",
             "#svg g[data-id='F/7/39'][id='F-7-39']",
@@ -80,7 +79,6 @@ namespace Dev1EndtoendRegression.StepDefinitions
             "#svg g[data-id='F/3/39'][id='F-3-39']",
             "#svg g[data-id='F/2/39'][id='F-2-39']",
             "#svg g[data-id='F/1/39'][id='F-1-39']",
-
             "#svg g[data-id='F/9/40'][id='F-9-40']",
             "#svg g[data-id='F/8/40'][id='F-8-40']",
             "#svg g[data-id='F/7/40'][id='F-7-40']",
@@ -90,7 +88,6 @@ namespace Dev1EndtoendRegression.StepDefinitions
             "#svg g[data-id='F/3/40'][id='F-3-40']",
             "#svg g[data-id='F/2/40'][id='F-2-40']",
             "#svg g[data-id='F/1/40'][id='F-1-40']",
-
             "#svg g[data-id='F/9/45'][id='F-9-45']",
             "#svg g[data-id='F/8/45'][id='F-8-45']",
             "#svg g[data-id='F/7/45'][id='F-7-45']",
@@ -104,17 +101,16 @@ namespace Dev1EndtoendRegression.StepDefinitions
 
             foreach (string seatSelector in seatSelectors)
             {
-                if (await _pageObject.HasElementAsync(seatSelector))
+                await _pageObject.ClickButtonsAndMenuOptionsAsync(seatSelector);
+
+                string goFurtherButton = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash[href='/Cart']:first-of-type";
+                if (await _pageObject.HasElementAsync(goFurtherButton))
                 {
-                    await _pageObject.ClickButtonsAndMenuOptionsAsync(seatSelector);
-
-                    string goFurther = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash[href='/Cart']:first-of-type";
-                    if (await _pageObject.HasElementAsync(goFurther))
-                    {
-                        await _pageObject.ClickButtonsAndMenuOptionsAsync(seatSelector);
-                    }
                     break;
-
+                }
+                else
+                {
+                    continue;
                 }
             }
         }
