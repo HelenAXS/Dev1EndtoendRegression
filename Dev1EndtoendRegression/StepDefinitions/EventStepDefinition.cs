@@ -31,7 +31,7 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [When(@"I press the button '([^']*)'")]
         public async Task WhenIPressTheButtonAsync(string buyTicket)
         {
-            buyTicket = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=332&IsSeason=False']";
+            buyTicket = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=332&IsSeason=False']"; //change the event ID here
             await _pageObject.ClickButtonsAndMenuOptionsAsync(buyTicket);
         }
 
@@ -125,7 +125,7 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [Then(@"I get to the whole Klarna flow until the succeed page")]
         public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPage()
         {
-            string email = "hgalan@axs.com";
+            string email = "hgalan@axs.com"; //change e-mail test here
             await _pageObject.KlarnaPaymentAsync(email);
         }
     }
