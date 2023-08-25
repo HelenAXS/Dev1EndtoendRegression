@@ -67,5 +67,25 @@ namespace Dev1EndtoendRegression.StepDefinitions
             Assert.IsTrue(actualUrl.Equals(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
         }
 
+        [Then(@"I press the drop down menu ""([^""]*)"" to log out")]
+        public async Task ThenIPressTheDropDownMenuToLogOutAsync(string p0)
+        {
+            string hoverSelector = $".nav-desktop a[href='/Account']";
+            string selector = $".dropdown .content a[href='/Account/Logout']";
+            await _pageObject.Page.HoverAsync(hoverSelector);
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+        }
+
+        [Then(@"I come back to the index page")]
+        public async Task ThenIComeBackToTheIndexPageAsync()
+        {
+            await _pageObject.Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+
+            var expectedUrl = "https://web4.1.dev.tt.eu.axs.com/";
+            var actualUrl = _pageObject.Page.Url;
+
+            Assert.IsTrue(actualUrl.Equals(expectedUrl), $"Expected URL: {expectedUrl}, Actual URL: {actualUrl}");
+        }
+
     }
 }

@@ -68,7 +68,7 @@ namespace Dev1EndtoendRegression.Objects
             //Press the BankId to continue
             var bankIdPage = await Page.WaitForPopupAsync();
             await bankIdPage.WaitForLoadStateAsync();
-            await bankIdPage.ClickAsync("#signInWithBankId");
+            await bankIdPage.ClickAsync("#signInWithBankId"); 
 
 
             //Managing different flows of Klarna
@@ -77,7 +77,7 @@ namespace Dev1EndtoendRegression.Objects
             {
                 //Confirmation of the payment
                 await bankIdPage.ClickAsync(selectorLoop);
-                await bankIdPage.ClickAsync($"[data-testid='SmoothCheckoutPopUp:enable']");
+                //await bankIdPage.ClickAsync($"[data-testid='SmoothCheckoutPopUp:enable']");
             }
             else
             {

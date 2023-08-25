@@ -12,22 +12,21 @@ namespace Dev1EndtoendRegression.Hooks
         [BeforeScenario]
         public async Task BeforeEventPurchaseFeatureScenario(IObjectContainer container)
         {
-                var playwright = await Playwright.CreateAsync();
-                var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
-                {
-                    Headless = false,
-                    SlowMo = 2000
-                });
+            var playwright = await Playwright.CreateAsync();
+            var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+            {
+                Headless = false,
+                SlowMo = 2000
+            });
 
-                container.RegisterInstanceAs(playwright);
-                container.RegisterInstanceAs(browser);
+            container.RegisterInstanceAs(playwright);
+            container.RegisterInstanceAs(browser);
 
-                var page = await browser.NewPageAsync();
-                container.RegisterInstanceAs(page);
+            var page = await browser.NewPageAsync();
+            container.RegisterInstanceAs(page);
 
-
-                var pageObject = new PageObject(page);
-                container.RegisterInstanceAs(pageObject);
+            var pageObject = new PageObject(page);
+            container.RegisterInstanceAs(pageObject);
         }
 
 

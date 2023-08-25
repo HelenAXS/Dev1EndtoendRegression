@@ -32,7 +32,7 @@ Scenario: Reservation of an event, a season, a product and a pot WITH autoseatin
 	
 	Then I get to the success page of the reservation
 
-	Scenario: Reservation of an event, a season, a product and a pot WITHOUT autoseating
+Scenario: Reservation of an event, a season, a product and a pot WITHOUT autoseating
 	Given I am in dev
 	And I press the menu 'MATCHER'
 	When I press the button 'KÖP BILJETT'
@@ -65,3 +65,15 @@ Scenario: Reservation of an event, a season, a product and a pot WITH autoseatin
 	And I get to the page with my information and press the button to confirm
 	
 	Then I get to the success page of the reservation
+
+Scenario: Pick up a Reservation in my account
+	Given I am in dev
+	And I press the menu 'LOGGA IN'
+	When I write the e-mail for my login
+	And I write the password for my login
+	And I press the button "LOGGA IN" to confirm
+	And I get to the main account page
+	And I press the button "Reservationer" to get to the reservation page
+	And press the button "Hämta Reservation" to pick up the reservation order
+	And confirm the picking to get to the cart
+	Then I get to the whole Klarna flow until the succeed page

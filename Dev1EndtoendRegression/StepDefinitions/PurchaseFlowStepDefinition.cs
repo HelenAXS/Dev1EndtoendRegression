@@ -1,16 +1,16 @@
 ﻿using Dev1EndtoendRegression.Objects;
 using Microsoft.Playwright;
 
-
+//[assembly: Parallelize(Scope = ExecutionScope.ClassLevel)]
 namespace Dev1EndtoendRegression.StepDefinitions
 {
     [Binding]
-    [Scope(Tag = "season")]
-    internal class SeasonStepDefinition
+    [Scope(Tag = "event")]
+    internal class PurchaseFlowStepDefinition
     {
         private readonly PageObject _pageObject;
 
-        public SeasonStepDefinition(PageObject pageObject)
+        public PurchaseFlowStepDefinition(PageObject pageObject)
         {
             _pageObject = pageObject;
         }
@@ -22,31 +22,31 @@ namespace Dev1EndtoendRegression.StepDefinitions
         }
 
         [Given(@"I press the menu '([^']*)'")]
-        public async Task GivenIPressTheMenuAsync(string matches)
+        public async Task GivenIPressTheMenuAsync(string menuMatches)
         {
-            string selector = $".nav-desktop a[href='/List/Seasons']";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            menuMatches = $".nav-desktop a[href='/List/Events']";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(menuMatches);
         }
 
         [When(@"I press the button '([^']*)'")]
         public async Task WhenIPressTheButtonAsync(string buyTicket)
         {
-            string selector = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=63&IsSeason=True']";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            buyTicket = $"a.btn.tickets[href='/Tickets/ChooseTickets?Id=424&IsSeason=False']"; //change the event ID here
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(buyTicket);
         }
 
         [When(@"I select a ticket type by pressing the button '([^']*)' once for one ticket")]
         public async Task WhenISelectATicketTypeByPressingTheButtonOnceForOneTicketAsync(string pressPlus)
         {
-            string selector = $"button:text('+')";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            pressPlus = $"button:text('+')";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(pressPlus);
         }
 
         [When(@"I press the button '([^']*)' to find the seats")]
         public async Task WhenIPressTheButtonToFindTheSeats(string findSeats)
         {
-            string selector = $"a.link-btn-regular.btn-find-tickets:text('Hitta 1 Biljett(er)')";
-            await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
+            findSeats = $"a.link-btn-regular.btn-find-tickets";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(findSeats);
         }
 
         [When(@"press the one section on the map")]
@@ -56,8 +56,8 @@ namespace Dev1EndtoendRegression.StepDefinitions
             await _pageObject.ClickButtonsAndMenuOptionsAsync(sectionSelector);
         }
 
-        [When(@"press the button to select a seat")]
-        public async Task WhenPressTheButtonToSelectASeatAsync()
+        [When(@"press the one seat on the map")]
+        public async Task WhenPressTheOneSeatOnTheMapAsync()
         {
             string[] seatSelectors = new string[]
             {
@@ -115,6 +115,13 @@ namespace Dev1EndtoendRegression.StepDefinitions
             }
         }
 
+        [When(@"press the button to select a seat")]
+        public async Task WhenPressTheButtonToSelectASeatAsync()
+        {
+            string goFurther = $"a.link-btn-regular.btn-find-tickets.btn-ripple.btn-jsSplash[href='/Cart']:first-of-type";
+            await _pageObject.ClickButtonsAndMenuOptionsAsync(goFurther);
+        }
+
         [When(@"press the button '([^']*)' to the cart")]
         public async Task WhenPressTheButtonToTheCart(string goFurther)
         {
@@ -125,9 +132,8 @@ namespace Dev1EndtoendRegression.StepDefinitions
         [Then(@"I get to the whole Klarna flow until the succeed page")]
         public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPage()
         {
-            string email = "hgalan@axs.com";
+            string email = "hgalan@axs.com"; //change e-mail test here
             await _pageObject.KlarnaPaymentAsync(email);
         }
-
     }
 }
