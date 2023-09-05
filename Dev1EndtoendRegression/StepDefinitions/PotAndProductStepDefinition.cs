@@ -6,11 +6,11 @@ namespace Dev1EndtoendRegression.StepDefinitions
 {
     [Binding]
     [Scope(Tag = "potAndProduct")]
-    internal class PotStepDefinition
+    internal class PotAndProductStepDefinition
     {
         private readonly PageObject _pageObject;
 
-        public PotStepDefinition(PageObject pageObject)
+        public PotAndProductStepDefinition(PageObject pageObject)
         {
             _pageObject = pageObject;
         }
@@ -136,7 +136,8 @@ namespace Dev1EndtoendRegression.StepDefinitions
         public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPageAsync()
         {
             string email = "hgalan@axs.com";
-            await _pageObject.KlarnaPaymentAsync(email);
+            string postalCode = "61138";
+            await _pageObject.KlarnaPaymentAsync(email, postalCode);
         }
 
         [Given(@"I press the menu '([^']*)'")]

@@ -30,7 +30,7 @@ namespace Dev1EndtoendRegression.Features
         private static string[] featureTags = new string[] {
                 "potAndProduct"};
         
-#line 1 "PotPurchaseFeature.feature"
+#line 1 "PotAndProductPurchaseFeature.feature"
 #line hidden
         
         public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext

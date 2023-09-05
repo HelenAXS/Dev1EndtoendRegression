@@ -307,10 +307,10 @@ namespace Dev1EndtoendRegression.StepDefinitions
             await _pageObject.ClickButtonsAndMenuOptionsAsync(selector);
         }
 
-        [Then(@"I get to the whole Klarna flow until the succeed page")]
-        public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPageAsync()
-        {
-            await _pageObject.KlarnaPaymentFlowFromAccountAsync();
-        }
+        //[Then(@"I get to the whole Klarna flow until the succeed page")]
+        //public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPageAsync()
+        //{
+        //    await _pageObject.KlarnaPaymentFlowFromAccountAsync();
+        //}
     }
 }

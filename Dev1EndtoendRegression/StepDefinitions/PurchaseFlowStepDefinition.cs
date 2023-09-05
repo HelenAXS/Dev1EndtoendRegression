@@ -133,7 +133,8 @@ namespace Dev1EndtoendRegression.StepDefinitions
         public async Task ThenIGetToTheWholeKlarnaFlowUntilTheSucceedPage()
         {
             string email = "hgalan@axs.com"; //change e-mail test here
-            await _pageObject.KlarnaPaymentAsync(email);
+            string postalCode = "61138";
+            await _pageObject.KlarnaPaymentAsync(email, postalCode);
         }
     }
 }
